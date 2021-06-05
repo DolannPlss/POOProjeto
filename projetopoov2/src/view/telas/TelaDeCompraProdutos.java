@@ -12,14 +12,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.LongStringConverter;
 
-public class TelaDeCompraProdutos extends Application implements EventHandler<ActionEvent>{
+public class TelaDeCompraProdutos implements EventHandler<ActionEvent>, TelaStrategy{
 	
 	private ProdutosControl control = new ProdutosControl();
+	
+
 	
 	private TextField txtId = new TextField();
 	private TextField txtNomeProdutos = new TextField();
@@ -31,7 +34,7 @@ public class TelaDeCompraProdutos extends Application implements EventHandler<Ac
 	private Button btnPesquisar = new Button("Pesquisar"); 
 	private Button btnSalvar = new Button("Salvar");
 	@Override
-	public void start(Stage stage) throws Exception {
+	public Pane gerarTela(){
 		GridPane painel = new GridPane();
 		BorderPane painelBorder = new BorderPane();
 		Scene scn = new Scene(painelBorder, 700, 400);
@@ -83,17 +86,16 @@ public class TelaDeCompraProdutos extends Application implements EventHandler<Ac
         Bindings.bindBidirectional(txtProdutosPreco.textProperty(), control.getPreco(), doubleToStringConverter);
         Bindings.bindBidirectional(txtTipoProdutos.textProperty(), control.getTipo());
         btnSalvar.disableProperty().bind(control.disableSalvarProperty());
+		return painelBorder;
 		
-		stage.setScene(scn);
-		stage.setTitle("RECTUM COPIA");
-		stage.show();
+
+	}
+	@Override
+	public void handle(ActionEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	@Override
-	public void handle(ActionEvent event) {}
 	
-	public static void main(String[] args) {
-		Application.launch(TelaDeCompraProdutos.class, args);
-	}
-	
+
 }
