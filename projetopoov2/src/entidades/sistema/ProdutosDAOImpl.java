@@ -14,7 +14,6 @@ public class ProdutosDAOImpl implements ProdutosDAO{
 	public void adicionar(Produtos p) {
 		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
 			String sql = String.format("INSERT INTO produtos(nome, marca, preco, tipo) VALUES (?, ?, ?, ?)");
-			System.out.println("SQL => " + sql);
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, p.getNome());
 			stmt.setString(2, p.getMarca());

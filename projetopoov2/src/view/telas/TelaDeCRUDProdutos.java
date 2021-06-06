@@ -3,6 +3,7 @@ package view.telas;
 import controle.telas.ProdutosControl;
 import entidades.sistema.Produtos;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +19,7 @@ import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.LongStringConverter;
 
-public class TelaDeCompraProdutos implements EventHandler<ActionEvent>, TelaStrategy{
+public class TelaDeCRUDProdutos implements EventHandler<ActionEvent>, TelaStrategy{
 	
 	private ProdutosControl control = new ProdutosControl();
 	
@@ -33,12 +34,16 @@ public class TelaDeCompraProdutos implements EventHandler<ActionEvent>, TelaStra
 	private Button btnAdicionar = new Button("Adicionar");
 	private Button btnPesquisar = new Button("Pesquisar"); 
 	private Button btnSalvar = new Button("Salvar");
+	private Button btnSair = new Button("Sair");
 	@Override
 	public Pane gerarTela(){
+
 		GridPane painel = new GridPane();
 		BorderPane painelBorder = new BorderPane();
 		Scene scn = new Scene(painelBorder, 700, 400);
-		
+		painel.setHgap(5); 
+		painel.setVgap(5);
+
 		Label lblProdutos = new Label("Produto(s)");
 		Label lblQtd = new Label("Quantidade");
 		
@@ -73,10 +78,15 @@ public class TelaDeCompraProdutos implements EventHandler<ActionEvent>, TelaStra
 		btnSalvar.setOnAction((e) ->{
 			control.atualizar();
 		});
+		
+		btnSair.setOnAction((e) ->{
+            Platform.exit();
+            System.exit(0);
+		});
 		painel.add(btnAdicionar, 0, 5);
 		painel.add(btnPesquisar, 1, 5);
 		painel.add(btnSalvar, 2, 5);
-		
+		painel.add(btnSair, 40, 5);
 		StringConverter longToStringConverter = new LongStringConverter();
         StringConverter doubleToStringConverter = new DoubleStringConverter();
 
